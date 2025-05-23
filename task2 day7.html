@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2 - Day 7</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #5cb1a6, #6dc1b5);
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .section-title {
+      font-size: 20px;
+      margin-top: 30px;
+      margin-bottom: 12px;
+      color: #34495e;
+      border-bottom: 2px solid #4caf91;
+      padding-bottom: 4px;
+    }
+    .question {
+      margin-bottom: 30px;
+    }
+    .english {
+      font-size: 16px;
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+    .translation {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 6px;
+    }
+    input[type="text"] {
+      width: 140px;
+      padding: 6px;
+      margin: 0 3px;
+      font-size: 15px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+    }
+    .check-btn {
+      margin-top: 6px;
+      background: #4caf91;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .feedback {
+      margin-top: 6px;
+      font-weight: bold;
+    }
+    .correct { color: green; }
+    .incorrect { color: red; }
+    .example {
+      margin-top: 6px;
+      font-style: italic;
+      color: #333;
+      line-height: 1.5;
+    }
+    @media (max-width: 600px) {
+      input[type="text"] {
+        width: 100%;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Task 2 - Day 7</h2>
+
+    <div class="section-title">一. 句子填空（Advertising）</div>
+
+    <div id="q1" class="question"></div>
+    <div id="q2" class="question"></div>
+    <div id="q3" class="question"></div>
+    <div id="q4" class="question"></div>
+
+    <div class="section-title">二. 短语填空（含例句 + 翻译）</div>
+
+    <div class="question">
+      <div class="translation">1. 入不敷出：</div>
+      <input type="text" id="p37">
+      <button class="check-btn" onclick="checkPhrase('p37', 'spend more than they earn', 'Many people spend more than they earn and end up in financial trouble.', '许多人入不敷出，最终陷入经济困境。')">Check</button>
+      <div class="feedback" id="fb_p37"></div>
+    </div>
+
+    <div class="question">
+      <div class="translation">2. 负债：</div>
+      <input type="text" id="p38">
+      <button class="check-btn" onclick="checkPhrase('p38', 'get into debt', 'It is easy to get into debt if you rely too much on credit cards.', '如果你过度依赖信用卡，很容易负债。')">Check</button>
+      <div class="feedback" id="fb_p38"></div>
+    </div>
+
+    <div class="question">
+      <div class="translation">3. 低收入家庭：</div>
+      <input type="text" id="p39">
+      <button class="check-btn" onclick="checkPhrase('p39', 'low income families', 'Low income families may not be able to afford brand-name products.', '低收入家庭可能负担不起品牌商品。')">Check</button>
+      <div class="feedback" id="fb_p39"></div>
+    </div>
+
+    <div class="question">
+      <div class="translation">4. 信用卡购物：</div>
+      <input type="text" id="p40">
+      <button class="check-btn" onclick="checkPhrase('p40', 'purchase goods using the credit card', 'Many consumers prefer to purchase goods using the credit card for convenience.', '许多消费者为了方便喜欢用信用卡购物。')">Check</button>
+      <div class="feedback" id="fb_p40"></div>
+    </div>
+
+    <div class="question">
+      <div class="translation">5. 管理自己的资金预算：</div>
+      <input type="text" id="p41">
+      <button class="check-btn" onclick="checkPhrase('p41', 'manage one\'s budget', 'Learning to manage one\'s budget is an essential life skill.', '学会管理自己的预算是一项重要的生活技能。')">Check</button>
+      <div class="feedback" id="fb_p41"></div>
+    </div>
+
+    <div class="question">
+      <div class="translation">6. 购买必需品和购物乐趣之间的平衡：</div>
+      <input type="text" id="p42">
+      <button class="check-btn" onclick="checkPhrase('p42', 'a balance between necessities and pleasure', 'A good shopper knows how to maintain a balance between necessities and pleasure.', '一个好的购物者懂得如何在必需品和购物乐趣之间找到平衡。')">Check</button>
+      <div class="feedback" id="fb_p42"></div>
+    </div>
+
+    <div class="question">
+      <div class="translation">7. 收支记录：</div>
+      <input type="text" id="p43">
+      <button class="check-btn" onclick="checkPhrase('p43', 'keeping a record on income and monthly spending', 'Keeping a record on income and monthly spending helps avoid overspending.', '记录收入和每月支出有助于避免超支。')">Check</button>
+      <div class="feedback" id="fb_p43"></div>
+    </div>
+  </div>
+
+  <script>
+    const sentences = [
+      {
+        id: "s1",
+        text: "Advertising aims to persuade people that buying a product will make them happier and it encourages consumers to associate certain brands with a higher status. Brands like “Armani” or “Mercedes” are status symbols.",
+        translation: "广告试图说服人们购买产品会让他们更快乐，并促使他们将品牌与地位联系起来。",
+        containerId: "q1"
+      },
+      {
+        id: "s2",
+        text: "Advertising aimed at children should be controlled or even banned. Unhealthy foods should not be marketed in a way that attracts children and governments should censor false information or harmful products.",
+        translation: "针对孩子的广告应当受到限制或禁止，不良食物不应吸引儿童，政府应审查错误或有害信息。",
+        containerId: "q2"
+      },
+      {
+        id: "s3",
+        text: "Famous sportsmen and women, for example, may endorse a particular brand of trainer or sportswear. In buying the product, the consumer may feel ‘closer’ to a person they admire.",
+        translation: "运动员可能代言产品，消费者购买后会觉得更接近偶像。",
+        containerId: "q3"
+      },
+      {
+        id: "s4",
+        text: "It is often the case that consumers buy products on impulse simply because of the way they are displayed. In supermarkets, for example, snacks are often situated by the checkout to tempt those who are tired and bored with queuing.",
+        translation: "消费者常常因为商品的摆放方式而冲动购物，超市常将零食放在收银台旁以诱导购买。",
+        containerId: "q4"
+      }
+    ];
+
+    function getRandomIndexes(array, min = 5, max = 7) {
+      const count = Math.min(Math.floor(Math.random() * (max - min + 1)) + min, array.length);
+      const set = new Set();
+      while (set.size < count) {
+        const i = Math.floor(Math.random() * array.length);
+        const word = array[i].replace(/[.,()"]/g, '');
+        if (word.length > 2 && !word.includes("'")) set.add(i);
+      }
+      return Array.from(set);
+    }
+
+    function renderSentence({ id, text, translation, containerId }) {
+      const words = text.split(" ");
+      const blanks = getRandomIndexes(words);
+      const answers = {};
+      const html = words.map((word, i) => {
+        const clean = word.replace(/[.,()"]/g, "");
+        const punct = word.match(/[.,()"]$/) ? word.slice(-1) : "";
+        if (blanks.includes(i)) {
+          const inputId = `${id}_${i}`;
+          answers[inputId] = clean.toLowerCase();
+          return `<input type="text" id="${inputId}" placeholder="...">${punct}`;
+        }
+        return word;
+      }).join(" ");
+      document.getElementById(containerId).innerHTML = `
+        <div class="english">${html}</div>
+        <div class="translation">${translation}</div>
+        <button class="check-btn" onclick='checkSentence("${id}", ${JSON.stringify(answers)})'>Check</button>
+        <div class="feedback" id="fb_${id}"></div>
+      `;
+    }
+
+    function checkSentence(id, answers) {
+      const feedback = document.getElementById("fb_" + id);
+      let correct = true;
+      for (const [inputId, expected] of Object.entries(answers)) {
+        const val = document.getElementById(inputId).value.trim().toLowerCase();
+        if (val !== expected) correct = false;
+      }
+      feedback.innerHTML = correct
+        ? "<span class='correct'>✔ 正确！</span>"
+        : `<span class='incorrect'>✘ 有错误</span> 正确答案：${Object.values(answers).join(" / ")}`;
+    }
+
+    function checkPhrase(id, answer, example, exampleCN) {
+      const feedback = document.getElementById("fb_" + id);
+      const input = document.getElementById(id).value.trim().toLowerCase();
+      if (input === answer.toLowerCase()) {
+        feedback.innerHTML = `<span class='correct'>✔ 正确！</span><div class='example'>雅思例句：${example}</div><div class='example'>中文翻译：${exampleCN}</div>`;
+      } else {
+        feedback.innerHTML = `<span class='incorrect'>✘ 错误</span> 正确答案：${answer}<div class='example'>雅思例句：${example}</div><div class='example'>中文翻译：${exampleCN}</div>`;
+      }
+    }
+
+    // 初始化句子填空
+    sentences.forEach(renderSentence);
+  </script>
+</body>
+</html>
